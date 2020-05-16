@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LocalDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="LocalDbModelStoreContainer">
+    <EntitySet Name="Product" EntityType="LocalDbModel.Store.Product" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Catalog" EntityType="LocalDbModel.Store.Catalog" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductCatalog" EntityType="LocalDbModel.Store.ProductCatalog" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ProductCatalog_Product" Association="LocalDbModel.Store.FK_ProductCatalog_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ProductCatalog" EntitySet="ProductCatalog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductCatalog_Catalog" Association="LocalDbModel.Store.FK_ProductCatalog_Catalog">
+      <End Role="Catalog" EntitySet="Catalog" />
+      <End Role="ProductCatalog" EntitySet="ProductCatalog" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Catalog">
+    <Key>
+      <PropertyRef Name="CatalogId" />
+    </Key>
+    <Property Name="CatalogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductCatalog">
+    <Key>
+      <PropertyRef Name="Product_ProductId" />
+      <PropertyRef Name="Catalog_CatalogId" />
+    </Key>
+    <Property Name="Product_ProductId" Type="int" Nullable="false" />
+    <Property Name="Catalog_CatalogId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ProductCatalog_Product">
+    <End Role="Product" Type="LocalDbModel.Store.Product" Multiplicity="1" />
+    <End Role="ProductCatalog" Type="LocalDbModel.Store.ProductCatalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductCatalog">
+        <PropertyRef Name="Product_ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductCatalog_Catalog">
+    <End Role="ProductCatalog" Type="LocalDbModel.Store.ProductCatalog" Multiplicity="*" />
+    <End Role="Catalog" Type="LocalDbModel.Store.Catalog" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Catalog">
+        <PropertyRef Name="CatalogId" />
+      </Principal>
+      <Dependent Role="ProductCatalog">
+        <PropertyRef Name="Catalog_CatalogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LocalDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="LocalDbModelStoreContainer">
+    <EntitySet Name="Product" EntityType="LocalDbModel.Store.Product" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Catalog" EntityType="LocalDbModel.Store.Catalog" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductCatalog" EntityType="LocalDbModel.Store.ProductCatalog" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ProductCatalog_Product" Association="LocalDbModel.Store.FK_ProductCatalog_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ProductCatalog" EntitySet="ProductCatalog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductCatalog_Catalog" Association="LocalDbModel.Store.FK_ProductCatalog_Catalog">
+      <End Role="Catalog" EntitySet="Catalog" />
+      <End Role="ProductCatalog" EntitySet="ProductCatalog" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Catalog">
+    <Key>
+      <PropertyRef Name="CatalogId" />
+    </Key>
+    <Property Name="CatalogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductCatalog">
+    <Key>
+      <PropertyRef Name="Product_ProductId" />
+      <PropertyRef Name="Catalog_CatalogId" />
+    </Key>
+    <Property Name="Product_ProductId" Type="int" Nullable="false" />
+    <Property Name="Catalog_CatalogId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ProductCatalog_Product">
+    <End Role="Product" Type="LocalDbModel.Store.Product" Multiplicity="1" />
+    <End Role="ProductCatalog" Type="LocalDbModel.Store.ProductCatalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductCatalog">
+        <PropertyRef Name="Product_ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductCatalog_Catalog">
+    <End Role="ProductCatalog" Type="LocalDbModel.Store.ProductCatalog" Multiplicity="*" />
+    <End Role="Catalog" Type="LocalDbModel.Store.Catalog" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Catalog">
+        <PropertyRef Name="CatalogId" />
+      </Principal>
+      <Dependent Role="ProductCatalog">
+        <PropertyRef Name="Catalog_CatalogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LocalDbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="LocalDbEntities" p1:LazyLoadingEnabled="true" >
+          <EntitySet Name="Product" EntityType="LocalDbModel.Product" />
+          <EntitySet Name="Catalog" EntityType="LocalDbModel.Catalog" />
+          <AssociationSet Name="ProductCatalog" Association="LocalDbModel.ProductCatalog">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Catalog" EntitySet="Catalog" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Catalog" Relationship="LocalDbModel.ProductCatalog" FromRole="Product" ToRole="Catalog" />
+        </EntityType>
+        <EntityType Name="Catalog">
+          <Key>
+            <PropertyRef Name="CatalogId" />
+          </Key>
+          <Property Name="CatalogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="LocalDbModel.ProductCatalog" FromRole="Catalog" ToRole="Product" />
+        </EntityType>
+        <Association Name="ProductCatalog">
+          <End Type="LocalDbModel.Product" Role="Product" Multiplicity="*" />
+          <End Type="LocalDbModel.Catalog" Role="Catalog" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LocalDbModelStoreContainer" CdmEntityContainer="LocalDbEntities">
+    <EntitySetMapping Name="Product">
+      <EntityTypeMapping TypeName="IsTypeOf(LocalDbModel.Product)">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Catalog">
+      <EntityTypeMapping TypeName="IsTypeOf(LocalDbModel.Catalog)">
+        <MappingFragment StoreEntitySet="Catalog">
+          <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ProductCatalog" TypeName="LocalDbModel.ProductCatalog" StoreEntitySet="ProductCatalog">
+      <EndProperty Name="Product">
+        <ScalarProperty Name="ProductId" ColumnName="Product_ProductId" />
+      </EndProperty>
+      <EndProperty Name="Catalog">
+        <ScalarProperty Name="CatalogId" ColumnName="Catalog_CatalogId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,69 @@
+﻿@model EURIS.Service.Helpers.CatalogViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Catalog</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Catalog.Code)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Catalog.Code)
+            @Html.ValidationMessageFor(model => model.Catalog.Code)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Catalog.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Catalog.Description)
+            @Html.ValidationMessageFor(model => model.Catalog.Description)
+        </div>
+
+        @if (Model.Products.Count() == 0)
+        {
+            <div>No products yet.</div>
+        }
+        else
+        {
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Products)
+            </div>
+            <div class="editor-field">
+
+                @for (var i = 0; i < Model.Products.Count(); i++)
+                {
+                    @Html.CheckBoxFor(model => model.Products[i].Active)
+                    @Html.DisplayFor(model => model.Products[i].Product.Description)
+                    @Html.HiddenFor(model => model.Products[i].Active)
+                    @Html.HiddenFor(model => model.Products[i].Product.ProductId)
+                    <br />
+                }
+
+            </div>
+        }
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

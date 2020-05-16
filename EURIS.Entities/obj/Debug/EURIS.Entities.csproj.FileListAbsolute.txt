@@ -1,0 +1,10 @@
+E:\_projects\EURISTest_vs2015_EN\EURIS.Entities\bin\Debug\EURIS.Entities.dll.config
+E:\_projects\EURISTest_vs2015_EN\EURIS.Entities\bin\Debug\EURIS.Entities.dll
+E:\_projects\EURISTest_vs2015_EN\EURIS.Entities\bin\Debug\EURIS.Entities.pdb
+E:\_projects\EURISTest_vs2015_EN\EURIS.Entities\bin\Debug\EntityFramework.dll
+E:\_projects\EURISTest_vs2015_EN\EURIS.Entities\bin\Debug\EntityFramework.xml
+E:\_projects\EURISTest_vs2015_EN\EURIS.Entities\obj\Debug\EURIS.Entities.csproj.CoreCompileInputs.cache
+E:\_projects\EURISTest_vs2015_EN\EURIS.Entities\obj\Debug\EURIS.Entities.csproj.CopyComplete
+E:\_projects\EURISTest_vs2015_EN\EURIS.Entities\obj\Debug\EURIS.Entities.dll
+E:\_projects\EURISTest_vs2015_EN\EURIS.Entities\obj\Debug\EURIS.Entities.pdb
+E:\_projects\EURISTest_vs2015_EN\EURIS.Entities\obj\Debug\EURIS.Entities.csprojAssemblyReference.cache

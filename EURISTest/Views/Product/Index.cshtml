@@ -1,0 +1,43 @@
+﻿@model IEnumerable<EURIS.Entities.Product>
+
+@{
+    ViewBag.Title = "List of products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+
+    @if (!Model.Any())
+    {
+        <tr>No products yet.</tr>
+    }
+    else
+    {
+        <tr>
+            <th></th>
+            <th>Id</th>
+            <th>Code</th>
+            <th>Description</th>
+        </tr>
+
+        foreach (var product in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { productId = product.ProductId }) |
+                    @Html.ActionLink("Details", "Details", new { productId = product.ProductId }) |
+                    @Html.ActionLink("Delete", "Delete", new { productId = product.ProductId })
+                </td>
+                <td>@product.ProductId</td>
+                <td>@product.Code</td>
+                <td>@product.Description</td>
+            </tr>
+        }
+    }
+
+</table>

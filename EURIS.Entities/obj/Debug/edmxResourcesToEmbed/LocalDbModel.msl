@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LocalDbModelStoreContainer" CdmEntityContainer="LocalDbEntities">
+    <EntitySetMapping Name="Product">
+      <EntityTypeMapping TypeName="IsTypeOf(LocalDbModel.Product)">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Catalog">
+      <EntityTypeMapping TypeName="IsTypeOf(LocalDbModel.Catalog)">
+        <MappingFragment StoreEntitySet="Catalog">
+          <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ProductCatalog" TypeName="LocalDbModel.ProductCatalog" StoreEntitySet="ProductCatalog">
+      <EndProperty Name="Product">
+        <ScalarProperty Name="ProductId" ColumnName="Product_ProductId" />
+      </EndProperty>
+      <EndProperty Name="Catalog">
+        <ScalarProperty Name="CatalogId" ColumnName="Catalog_CatalogId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

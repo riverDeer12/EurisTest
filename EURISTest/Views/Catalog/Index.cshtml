@@ -1,0 +1,58 @@
+﻿@model IEnumerable<EURIS.Entities.Catalog>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Catalogs</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+
+    @if (!Model.Any())
+    {
+        <tr>No catalogs yet.</tr>
+    }
+    else
+    {
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                Id
+            </th>
+            <th>
+                Code
+            </th>
+            <th>
+                Description
+            </th>
+        </tr>
+
+        foreach (var catalog in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { catalogId = catalog.CatalogId }) |
+                    @Html.ActionLink("Details", "Details", new { catalogId = catalog.CatalogId }) |
+                    @Html.ActionLink("Delete", "Delete", new { catalogId = catalog.CatalogId })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => catalog.CatalogId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => catalog.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => catalog.Description)
+                </td>
+            </tr>
+        }
+    }
+
+
+</table>

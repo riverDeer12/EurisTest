@@ -1,0 +1,12 @@
+E:\_projects\EURISTest_vs2015_EN\EURIS.Service\bin\Debug\EURIS.Service.dll
+E:\_projects\EURISTest_vs2015_EN\EURIS.Service\bin\Debug\EURIS.Service.pdb
+E:\_projects\EURISTest_vs2015_EN\EURIS.Service\bin\Debug\EntityFramework.dll
+E:\_projects\EURISTest_vs2015_EN\EURIS.Service\bin\Debug\EURIS.Entities.dll
+E:\_projects\EURISTest_vs2015_EN\EURIS.Service\bin\Debug\EURIS.Entities.pdb
+E:\_projects\EURISTest_vs2015_EN\EURIS.Service\bin\Debug\EURIS.Entities.dll.config
+E:\_projects\EURISTest_vs2015_EN\EURIS.Service\bin\Debug\EntityFramework.xml
+E:\_projects\EURISTest_vs2015_EN\EURIS.Service\obj\Debug\EURIS.Service.csprojAssemblyReference.cache
+E:\_projects\EURISTest_vs2015_EN\EURIS.Service\obj\Debug\EURIS.Service.csproj.CoreCompileInputs.cache
+E:\_projects\EURISTest_vs2015_EN\EURIS.Service\obj\Debug\EURIS.Service.csproj.CopyComplete
+E:\_projects\EURISTest_vs2015_EN\EURIS.Service\obj\Debug\EURIS.Service.dll
+E:\_projects\EURISTest_vs2015_EN\EURIS.Service\obj\Debug\EURIS.Service.pdb

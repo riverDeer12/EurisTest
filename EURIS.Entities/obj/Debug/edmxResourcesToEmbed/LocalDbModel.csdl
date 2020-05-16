@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LocalDbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="LocalDbEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Product" EntityType="LocalDbModel.Product" />
+    <EntitySet Name="Catalog" EntityType="LocalDbModel.Catalog" />
+    <AssociationSet Name="ProductCatalog" Association="LocalDbModel.ProductCatalog">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Catalog" EntitySet="Catalog" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Catalog" Relationship="LocalDbModel.ProductCatalog" FromRole="Product" ToRole="Catalog" />
+  </EntityType>
+  <EntityType Name="Catalog">
+    <Key>
+      <PropertyRef Name="CatalogId" />
+    </Key>
+    <Property Name="CatalogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="LocalDbModel.ProductCatalog" FromRole="Catalog" ToRole="Product" />
+  </EntityType>
+  <Association Name="ProductCatalog">
+    <End Type="LocalDbModel.Product" Role="Product" Multiplicity="*" />
+    <End Type="LocalDbModel.Catalog" Role="Catalog" Multiplicity="*" />
+  </Association>
+</Schema>

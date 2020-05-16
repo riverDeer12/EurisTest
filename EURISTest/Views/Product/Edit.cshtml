@@ -1,0 +1,71 @@
+﻿@model EURIS.Service.Helpers.ProductViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Product</legend>
+
+        @Html.HiddenFor(model => model.Product.ProductId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.Code)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Product.Code)
+            @Html.ValidationMessageFor(model => model.Product.Code)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Product.Description)
+            @Html.ValidationMessageFor(model => model.Product.Description)
+        </div>
+
+        @if (!Model.Catalogs.Any())
+        {
+            <div>No catalogs yet.</div>
+        }
+        else
+        {
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Catalogs)
+            </div>
+            <div class="editor-field">
+
+                @for (var i = 0; i < Model.Catalogs.Count(); i++)
+                {
+                    @Html.CheckBoxFor(model => model.Catalogs[i].Active)
+                    @Html.DisplayFor(model => model.Catalogs[i].Catalog.Description)
+                    @Html.HiddenFor(model => model.Catalogs[i].Active)
+                    @Html.HiddenFor(model => model.Catalogs[i].Catalog.CatalogId)
+                    <br />
+                }
+
+            </div>
+        }
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
